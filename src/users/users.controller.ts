@@ -27,7 +27,7 @@ export class UsersController {
   async findOne(@Param('id') id: string) {
     try {
       const data = await this.usersService.findOne(
-        +id,
+        id
       );
       return {
         success: true,
@@ -50,7 +50,7 @@ export class UsersController {
   ) {
     try {
       await this.usersService.update(
-        +id,
+        id,
         updateUserDto,
       );
       return {
@@ -68,7 +68,7 @@ export class UsersController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     try {
-      await this.usersService.remove(+id);
+      await this.usersService.remove(id);
       return {
         success: true,
         message: 'User Deleted Successfully',

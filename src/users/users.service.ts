@@ -38,7 +38,7 @@ export class UsersService {
     const hashedPassword = await hashPassword(dto.password)
     const userData = this.userRepository.create({
       ...dto,
-      password_hash:hashedPassword
+      password:hashedPassword
     });
     return this.userRepository.save(userData);
   }
@@ -47,7 +47,7 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  async findOne(id: number): Promise<UserEntity> {
+  async findOne(id: string): Promise<UserEntity> {
     const userData =
       await this.userRepository.findOneBy({ id });
     if (!userData) {
@@ -59,8 +59,20 @@ export class UsersService {
     return userData;
   }
 
+    async findOnebyName(name: string): Promise<UserEntity> {
+    const userData =
+      await this.userRepository.findOneBy({ name });
+    if (!userData) {
+      throw new HttpException(
+        'User Not Found',
+        404,
+      );
+    }
+    return userData;
+  }
+
   async update(
-    id: number,
+    id: string,
     updateUserDto: UpdateUserDto,
   ): Promise<UserEntity> {
     const existingUser = await this.findOne(id);
@@ -73,7 +85,7 @@ export class UsersService {
     );
   }
 
-  async remove(id: number): Promise<UserEntity> {
+  async remove(id: string): Promise<UserEntity> {
     const existingUser = await this.findOne(id);
     return await this.userRepository.remove(
       existingUser,

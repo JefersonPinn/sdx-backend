@@ -4,7 +4,7 @@ import { TenantEntity } from "src/tenants/entities/tenant.entity";
 @Entity('users')
 export class UserEntity {
     @PrimaryGeneratedColumn('uuid')
-    id!: number;
+    id!: string;
 
     @Column({type: 'varchar', length: 255, nullable: true})
     cpf!: string | null;
@@ -16,7 +16,7 @@ export class UserEntity {
     email!: string | null;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    password_hash!: string | null;
+    password!: string;
 
     @Column({ type: 'varchar', length: 50, nullable: true })
     role!: string | null;

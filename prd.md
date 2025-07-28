@@ -3,14 +3,14 @@
 ## 1. Introdução e Visão Geral
 
 *   **Produto:** sdx-backend
-*   **Visão do Produto:** (Descreva em 1-2 frases qual é o objetivo final e o impacto desejado do projeto. Ex: "Ser a plataforma líder para...")
-*   **Problema a ser Resolvido:** (Qual problema do cliente ou do negócio este backend está resolvendo? Por que ele é necessário?)
-*   **Contexto do Negócio:** (Como este projeto se encaixa nos objetivos gerais da empresa?)
+*   **Visão do Produto:** Ser a plataforma referencia em dados e gestão de ETES
+*   **Problema a ser Resolvido:** Resolver a gestão de analises e integrar IOT, e gerenciar lodo
+*   **Contexto do Negócio:** Financeiros
 
 ## 2. Objetivos e Metas
 
-*   **Objetivos de Negócio:** (O que a empresa espera alcançar com este projeto? Ex: "Aumentar a retenção de usuários em 15%", "Reduzir custos operacionais em 10%.")
-*   **Objetivos do Usuário:** (O que os usuários poderão fazer com este backend que não podiam antes? Ex: "Gerenciar seus dados de forma mais rápida e segura.")
+*   **Objetivos de Negócio:** Reduzir custos operacionais em 10%.
+*   **Objetivos do Usuário:** O que os usuários poderão fazer com este backend que não podiam antes? Ex: "Gerenciar seus dados de forma mais rápida e segura.
 
 ## 3. Público-Alvo e Personas
 

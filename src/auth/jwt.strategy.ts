@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
+import { JwtPayload } from './request-with-user.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -16,9 +17,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   // O Passport verifica a assinatura do JWT e decodifica o JSON.
   // Em seguida, invoca o `validate()` passando o payload decodificado.
-  async validate(payload: any) {
-    // Aqui, podemos enriquecer o objeto `request.user` com mais dados do usuário se necessário.
-    // O que for retornado aqui será anexado ao objeto Request.
-    return { userId: payload.sub, username: payload.username, tenantId: payload.tenantId };
+  async validate(payload: JwtPayload): Promise<JwtPayload> {
+    // O que for retornado aqui será anexado ao objeto Request como `req.user`.
+    // Ao retornar o payload diretamente, garantimos que `req.user` terá
+    // as propriedades `sub`, `username` e `tenantId`, como esperado no controller.
+    return payload;
   }
 }

@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateAnalysisDto } from './dto/create-analysis.dto';
-import { UpdateAnalysisDto } from './dto/update-analysis.dto';
+import { Analysis } from './entities/analysis.entity';
 
 @Injectable()
 export class AnalysisService {
-  create(createAnalysisDto: CreateAnalysisDto) {
-    return 'This action adds a new analysis';
+  constructor(
+    @InjectRepository(Analysis)
+    private analysisRepository: Repository<Analysis>,
+  ) {}
+
+  async create(
+    createAnalysisDto: CreateAnalysisDto,
+    userId: string,
+    tenantId: string,
+  ): Promise<Analysis> {
+    const analysisToSave = this.analysisRepository.create({
+      ...createAnalysisDto, // Pega todos os dados do formulário (DTO)
+      userId: userId,       // Adiciona o ID do usuário logado (do JWT)
+      tenantId: tenantId,   // Adiciona o ID do tenant (do JWT)
+    });
+
+    return this.analysisRepository.save(analysisToSave);
   }
 
-  findAll() {
-    return `This action returns all analysis`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} analysis`;
-  }
-
-  update(id: number, updateAnalysisDto: UpdateAnalysisDto) {
-    return `This action updates a #${id} analysis`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} analysis`;
-  }
+  // ... seus outros métodos (findAll, findOne, softDelete, etc.)
 }
+

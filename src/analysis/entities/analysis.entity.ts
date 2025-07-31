@@ -1,6 +1,6 @@
 import { TenantEntity } from "src/tenants/entities/tenant.entity";
 import { UserEntity } from "src/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('analysis')
 export class Analysis {
@@ -37,11 +37,23 @@ export class Analysis {
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     suspendedSolids: number;
 
+    @Column({ type: 'uuid', name: 'corrected_from_id', nullable: true })
+    correctedFromId: string | null;
+
+    @CreateDateColumn({ name: 'created_at' })
+    createdAt: Date;
+
+    @UpdateDateColumn({ name: 'updated_at' })
+    updatedAt: Date;
+
+    @DeleteDateColumn({ name: 'deleted_at' })
+    deletedAt: Date;
+
     @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'user_id' })
-    user: UserEntity[];
+    user: UserEntity;
 
     @ManyToOne(() => TenantEntity, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'tenant_id' })
-    tenant: TenantEntity[];
+    tenant: TenantEntity;
 }

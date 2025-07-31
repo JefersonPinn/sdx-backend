@@ -19,6 +19,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any) {
     // Aqui, podemos enriquecer o objeto `request.user` com mais dados do usuário se necessário.
     // O que for retornado aqui será anexado ao objeto Request.
-    return { userId: payload.sub, username: payload.username };
+    return { userId: payload.sub, username: payload.username, tenantId: payload.tenantId };
   }
 }

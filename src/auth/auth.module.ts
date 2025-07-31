@@ -6,11 +6,17 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TenantEntity } from 'src/tenants/entities/tenant.entity';
 
 
 
 @Module({
-  imports: [ConfigModule, UsersModule,
+  imports: [
+    ConfigModule,
+    UsersModule,
+    // Esta linha é crucial para que o AuthService possa injetar o TenantRepository
+    TypeOrmModule.forFeature([TenantEntity]),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

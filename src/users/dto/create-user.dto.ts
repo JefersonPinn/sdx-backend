@@ -33,5 +33,5 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     @IsString()
-    id_tenants: string;
+    id_tenant: string;
 }

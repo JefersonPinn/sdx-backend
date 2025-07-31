@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserTenantEntity } from "src/relations/entities/user-tenant.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('tenants')
 export class TenantEntity {
@@ -25,4 +26,8 @@ export class TenantEntity {
 
     @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     updated_at!: Date;
+
+    // Adicione a relação OneToMany com a nova tabela de junção
+    @OneToMany(() => UserTenantEntity, userTenant => userTenant.tenant)
+    userTenants!: UserTenantEntity[];
 }

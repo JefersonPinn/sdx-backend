@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { TenantEntity } from "src/tenants/entities/tenant.entity";
+import { UserTenantEntity } from "src/relations/entities/user-tenant.entity";
 
 @Entity('users')
 export class UserEntity {
@@ -36,7 +37,7 @@ export class UserEntity {
     @Column({ type: 'uuid', nullable: true })
     id_tenants!: string | null; // Coluna para a chave estrangeira
 
-    @ManyToOne(() => TenantEntity, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
-    @JoinColumn({ name: 'id_tenants' })
-    tenant!: TenantEntity | null; // Relação com a entidade Tenant
+    // Adicione a relação OneToMany com a nova tabela de junção
+    @OneToMany(() => UserTenantEntity, userTenant => userTenant.user)
+    userTenants!: UserTenantEntity[];
 }
